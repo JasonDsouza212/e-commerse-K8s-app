@@ -1,0 +1,409 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emailservice
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: emailservice
+  template:
+    metadata:
+      labels:
+        app: emailservice
+    spec:
+      containers:
+        - name: service
+          image: gcr.io/google-samples/microservices-demo/emailservice
+          ports:
+          - containerPort: 8080
+          env:
+          - name: PORT
+            value: "8080" 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: emailservice 
+spec:
+  type: ClusterIp
+  selector:
+    app: emailservice
+  ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendationservice 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: recommendationservice
+  template:
+    metadata:
+      labels:
+        app: recommendationservice
+    spec:
+      containers:
+        - name: service
+          image: gcr.io/google-samples/microservices-demo/recommendationservice
+          ports:
+            - containerPort: 8080
+            env:
+            - name: PORT
+              value: "8080" 
+            - name: PRODUCT_CATALOG_SERVICE_ADDR
+              value: "productcatalogservice:3550"
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommendationservice
+spec:
+  type: ClusterIp
+  selector:
+    app: recommendationservice
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productcatalogservice
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: productcatalogservice
+  template:
+    metadata:
+      labels:
+        app: productcatalogservice
+    spec:
+      containers:
+        - name: service
+          image: gcr.io/google-samples/microservices-demo/productcatalogservice
+          ports:
+          - containerPort: 3550
+          env:
+          - name: PORT
+            value: "3550"    
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: productcatalogservice
+spec:
+  type: ClusterIp
+  selector:
+    app: productcatalogservice
+  ports:
+    - port: 3550
+      protocol: TCP
+      targetPort: 3550
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - name: 
+          image: 
+          ports:
+            - containerPort: 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+spec:
+  type: ClusterIp
+  selector:
+    app:
+  ports:
+    - port: 
+      protocol: TCP
+      targetPort: 
+
