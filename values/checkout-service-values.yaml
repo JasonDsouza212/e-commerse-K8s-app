@@ -1,5 +1,5 @@
 appName: checkoutservice
-appImage: gcr.io/google-samples/microservices-demo/checkoutservice
+appImage: gcr.io/google-samples/microservices-demo/checkoutservices
 appVersion: v0.2.3
 appReplicas: 2
 containerPort: 5050

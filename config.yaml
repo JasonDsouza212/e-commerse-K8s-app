@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   name: emailservice
 spec:
-  replicas: 2 
   selector:
     matchLabels:
       app: emailservice
@@ -21,25 +20,25 @@ spec:
         env:
         - name: PORT
           value: "8080" 
-        - name: DISABLE_TRACING
-          value: "1"
-        - name: DISABLE_PROFILER
-          value: "1"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:8080"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:8080"]
-        resources:
-          requests:
-            cpu: 100m
-            memory: 64Mi 
-          limits:
-            cpu: 200m
-            memory: 128Mib
+        # - name: DISABLE_TRACING
+        #   value: "1"
+        # - name: DISABLE_PROFILER
+        #   value: "1"
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:8080"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:8080"]
+        # resources:
+        #   requests:
+        #     cpu: 100m
+        #     memory: 64Mi 
+        #   limits:
+        #     cpu: 200m
+        #     memory: 128Mib
 
 ---
 apiVersion: v1
@@ -60,7 +59,6 @@ kind: Deployment
 metadata:
   name: recommendationservice 
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: recommendationservice
@@ -79,14 +77,14 @@ spec:
           value: "8080" 
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:3550"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:8080"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:8080"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:8080"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:8080"]
 --- 
 apiVersion: v1
 kind: Service
@@ -106,7 +104,6 @@ kind: Deployment
 metadata:
   name: productcatalogservice
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: productcatalogservice
@@ -123,14 +120,14 @@ spec:
         env:
         - name: PORT
           value: "3550"    
-        livenessProbe: 
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:3550"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:3550"]
+        # livenessProbe: 
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:3550"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:3550"]
 ---
 apiVersion: v1
 kind: Service
@@ -141,8 +138,8 @@ spec:
   selector:
     app: productcatalogservice
   ports:
-  - port: 3550
-    protocol: TCP
+  - protocol: TCP
+    port: 3550
     targetPort: 3550
 ---
 apiVersion: apps/v1
@@ -150,7 +147,6 @@ kind: Deployment
 metadata:
   name: paymentservice
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: paymentservice
@@ -167,14 +163,14 @@ spec:
         env:
         - name: PORT
           value: "50051"   
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:50051"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:50051"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:50051"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:50051"]
 ---
 apiVersion: v1
 kind: Service
@@ -194,7 +190,7 @@ kind: Deployment
 metadata:
   name: currencyservice
 spec:
-  replicas: 2
+ 
   selector:
     matchLabels:
       app: currencyservice
@@ -211,14 +207,14 @@ spec:
         env:
         - name: PORT
           value: "7000" 
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:7000"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:7000"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:7000"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:7000"]
 ---
 apiVersion: v1
 kind: Service
@@ -238,7 +234,7 @@ kind: Deployment
 metadata: 
   name: shippingservice
 spec:
-  replicas: 2
+ 
   selector:
     matchLabels:
       app: shippingservice
@@ -255,14 +251,14 @@ spec:
         env:
         - name: PORT
           value: "50051" 
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:50051"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:50051"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:50051"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:50051"]
 ---
 apiVersion: v1
 kind: Service
@@ -282,7 +278,7 @@ kind: Deployment
 metadata:
   name: adservice
 spec:
-  replicas: 2
+ 
   selector:
     matchLabels:
       app: adservice
@@ -299,14 +295,14 @@ spec:
         env:
         - name: PORT
           value: "9555"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:9555"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:9555"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:9555"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:9555"]
 ---
 apiVersion: v1
 kind: Service
@@ -326,7 +322,6 @@ kind: Deployment
 metadata:
   name: cartservice
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: cartservice
@@ -341,18 +336,16 @@ spec:
         ports:
         - containerPort: 7070
         env:
-        - name: PORT
-          value: "7070"
         - name: REDIS_ADDR
           value: "redis-cart:6379"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:7070"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:7070"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:7070"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:7070"]
 ---
 apiVersion: v1
 kind: Service
@@ -372,7 +365,7 @@ kind: Deployment
 metadata:
   name: redis-cart
 spec:
-  replicas: 2
+ 
   selector:
     matchLabels:
       app: redis-cart
@@ -418,7 +411,7 @@ kind: Deployment
 metadata:
   name: checkoutservice
 spec:
-  replicas: 2
+ 
   selector:
     matchLabels:
       app: checkoutservice
@@ -447,14 +440,14 @@ spec:
           value: "currencyservice:7000"
         - name: CART_SERVICE_ADDR
           value: "cartservice:7070"   
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:5050"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:5050"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:5050"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:5050"]
 ---
 apiVersion: v1
 kind: Service
@@ -474,7 +467,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  replicas: 2
+ 
   selector:
     matchLabels:
       app: frontend
@@ -505,14 +498,14 @@ spec:
           value: "checkoutservice:5050"
         - name: AD_SERVICE_ADDR
           value: "adservice:9555"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:8080"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health-probe", "-addr=:8080"]
+        # livenessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:8080"]
+        # readinessProbe:
+        #   periodSeconds: 5
+        #   exec:
+        #     command: ["/bin/grpc_health-probe", "-addr=:8080"]
 ---
 apiVersion: v1
 kind: Service
